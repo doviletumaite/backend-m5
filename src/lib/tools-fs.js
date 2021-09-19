@@ -5,9 +5,10 @@ import { fileURLToPath } from "url"
 const { readJSON, writeJSON } = fs
 
 const dataFolderPath = join(dirname(fileURLToPath(import.meta.url)), "../data")
-console.log("data folder",dataFolderPath)
+
 const postsJSONPath = join(dataFolderPath, "posts.json")
 const authorsJSONPath = join(dataFolderPath, "authors.json")
+
 export const getPost = () => readJSON(postsJSONPath)
 export const getAuthors = () => readJSON(authorsJSONPath)
 
