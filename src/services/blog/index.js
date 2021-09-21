@@ -1,7 +1,6 @@
 // http://localhost:3002/posts
 import express from "express"
 import uniqid from "uniqid";
-import fs from "fs";
 import { getPost, writePosts } from "../../lib/tools-fs.js"
 
 const postsRouter = express.Router()
@@ -9,8 +8,8 @@ postsRouter.post("/", async (req, res, next)=>{
   try {
       const post = {
           id: uniqid(),
+          ...req.body,
           createdAt: new Date(),
-          updatedAt: new Date(),
       }
       const posts = await getPost()
       posts.push(post)
@@ -45,9 +44,9 @@ postsRouter.put("/:id", async (req, res, next)=>{
     try {
      const posts = await getPost() 
      const index = posts.findIndex(p => p.id === req.params.id)
-     const editedPost = {...posts[index], ...req.body}
+     const editedPost = {...posts[index], ...req.body, updatedAt: new Date()}
      posts[index] = editedPost  
-     await writePosts(editedPost)
+     await writePosts(posts)
      res.send(editedPost)
     } catch (error) {
         next(error);    }
