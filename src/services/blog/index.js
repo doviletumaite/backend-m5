@@ -17,7 +17,7 @@ postsRouter.post("/", async (req, res, next)=>{
       await writePosts(posts)
       res.send(post)
   } catch (error) {
-    res.sendStatus(500).send({ message: error.message });  
+    next(error);
   }
 })
 
@@ -26,8 +26,7 @@ postsRouter.get("/", async (req, res, next)=>{
     const posts = await getPost()
     res.send(posts)
    } catch (error) {
-    res.sendStatus(500).send({ message: error.message }); 
-   }
+    next(error);   }
 })
 
 postsRouter.get("/:id", async (req, res, next)=>{
@@ -39,8 +38,7 @@ postsRouter.get("/:id", async (req, res, next)=>{
      }
      res.send(post)
     } catch (error) {
-     res.sendStatus(500).send({ message: error.message });   
-    }
+        next(error);    }
 })
 
 postsRouter.put("/:id", async (req, res, next)=>{
@@ -52,8 +50,7 @@ postsRouter.put("/:id", async (req, res, next)=>{
      await writePosts(editedPost)
      res.send(editedPost)
     } catch (error) {
-     res.sendStatus(500).send({ message: error.message }); 
-    }
+        next(error);    }
 })
 
 postsRouter.delete("/:id", async (req, res, next)=>{
@@ -67,7 +64,6 @@ postsRouter.delete("/:id", async (req, res, next)=>{
      await writePosts(posts)
      res.status(204).send()   
     } catch (error) {
-    //  res.sendStatus(500).send({ message: error.message }); 
-    }
+        next(error);    }
 })
 export default postsRouter
