@@ -7,11 +7,24 @@ import cors from "cors"
 import { badRequestErrorHandler, forbiddenErrorHandler, genericServerErrorHandler, notFoundErrorHandler } from "./errorHandlers.js"
 
 const server = express()
-const port = 3002
+const port = process.env.PORT
 const logger = (req, res, next) => {
   console.log(`Request Method ${req.method} +++++++ Request URL ${req.url}`)
   next()
 }
+
+const whiteList = [process.env.FE_DEV_URL, process.env.FE_PROD_URL]
+const corsOptions = {
+  origin: function (origin, next){
+    console.log(origin)
+    if(whiteList.indexOf(origin) !== -1) {
+      next(null, true)
+    } else {
+      next(new Error(`origin ${origin} not allowed!`))
+    }
+  }
+}
+
 server.use(logger)
 server.use(cors())
 server.use(express.json())
