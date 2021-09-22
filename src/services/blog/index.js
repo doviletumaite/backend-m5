@@ -74,7 +74,8 @@ postsRouter.delete("/:id", async (req, res, next)=>{
      await writePosts(posts)
      res.status(204).send()   
     } catch (error) {
-        next(error);    }
+        next(error);   
+    }
 })
 
 
@@ -90,4 +91,6 @@ postsRouter.delete("/:id", async (req, res, next)=>{
 //       }
 //     }
 //   );
+
+
 export default postsRouter

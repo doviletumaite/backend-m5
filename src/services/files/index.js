@@ -6,7 +6,7 @@ import { pipeline } from "stream"
 
 const filesRouter = express.Router()
 
-filesRouter.post("/uploadAvatar/:id",
+filesRouter.post("/uploadPicture/:id",
 multer({})
 .single("picture"),
 async (req, res, next) => {
@@ -17,6 +17,7 @@ async (req, res, next) => {
         next(error) 
     }
 })
+
 
 filesRouter.get("/PDFDownload", async (req, res, next) => {
   try {
