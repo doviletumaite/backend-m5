@@ -2,8 +2,18 @@
 import express from "express"
 import uniqid from "uniqid";
 import { getPost, writePosts } from "../../lib/tools-fs.js"
+// import { v2 as cloudinary } from "cloudinary";
+// import { CloudinaryStorage } from "multer-storage-cloudinary";
 
 const postsRouter = express.Router()
+
+// const cloudinaryStorage = new CloudinaryStorage({
+//     cloudinary,
+//     params: {
+//       folder: "img",
+//     },
+//   });
+
 postsRouter.post("/", async (req, res, next)=>{
   try {
       const post = {
@@ -66,4 +76,18 @@ postsRouter.delete("/:id", async (req, res, next)=>{
     } catch (error) {
         next(error);    }
 })
+
+
+
+// postsRouter.post(
+//     "/:id/cloudinaryUpload",
+//     multer({ storage: cloudinaryStorage }).single("blogPostCover"),
+//     async (req, res, next) => {
+//       try {
+//         res.send(updatedPost);
+//       } catch (error) {
+//         next(error);
+//       }
+//     }
+//   );
 export default postsRouter
