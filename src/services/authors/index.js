@@ -23,6 +23,7 @@ authorsRouter.post("/", async (req, res, next)=>{
 authorsRouter.get("/", async (req, res, next)=>{
     try {
         const authors = await getAuthors()
+        console.log(authors)
         res.send(authors)
     } catch (error) {
         next(error);  
