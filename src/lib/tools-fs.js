@@ -18,3 +18,5 @@ export const getAuthors = () => readJSON(authorsJSONPath)
 export const writePosts = content => writeJSON(postsJSONPath, content)
 export const writeAuthors = content => writeJSON(authorsJSONPath, content)
 
+export const getAuthorsReadableStream = () => fs.createReadStream(authorsJSONPath)
+
