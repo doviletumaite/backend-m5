@@ -1,4 +1,5 @@
 // http://localhost:3002/posts
+// https://bestriveblog.herokuapp.com/posts
 import express from "express"
 import uniqid from "uniqid";
 import { getPost, writePosts } from "../../lib/tools-fs.js"

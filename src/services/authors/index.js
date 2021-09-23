@@ -1,4 +1,5 @@
 // http://localhost:3002/authors
+// https://bestriveblog.herokuapp.com/authors
 import express from "express"
 import uniqid from "uniqid";
 import { getAuthors, writeAuthors } from "../../lib/tools-fs.js";
