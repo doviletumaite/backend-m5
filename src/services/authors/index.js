@@ -2,6 +2,7 @@
 // https://bestriveblog.herokuapp.com/authors
 import express from "express"
 import uniqid from "uniqid";
+import { sendEmail } from "../../lib/email.js";
 import { getAuthors, writeAuthors } from "../../lib/tools-fs.js";
 
 
@@ -64,6 +65,16 @@ authorsRouter.delete("/:id", async (req, res, next)=>{
     authors = authors.filter(a => a.id !== req.params.id)
     await writeAuthors(authors)
     res.status(204).send() 
+    } catch (error) {
+        next(error);   
+    }
+})
+
+authorsRouter.post("/register", async (req, res, next) => {
+    try {
+        const {email} = req.body
+        await sendEmail(email)
+        res.send("your stunning mail is sent *_*")
     } catch (error) {
         next(error);   
     }
